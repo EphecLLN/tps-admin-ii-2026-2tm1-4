@@ -1,0 +1,11 @@
+services:
+  bind9:
+    image: ubuntu/bind9
+    container_name: dns-server
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    volumes:
+      # On monte uniquement les fichiers dont on a besoin
+      - ./config/named.conf.local:/etc/bind/named.conf.local
+      - ./zones/db.ephec.be:/etc/bind/db.ephec.be

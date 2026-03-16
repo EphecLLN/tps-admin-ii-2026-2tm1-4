@@ -1,0 +1,11 @@
+$TTL 86400
+@   IN  SOA ns.l1-1.ephec-ti.be. admin.l1-1.ephec-ti.be. (
+        2026031601 ; Serial (Format AAAAMMJJNN)
+        3600       ; Refresh
+        900        ; Retry
+        1209600    ; Expire
+        86400 )    ; Minimum
+
+@   IN  NS  ns.l1-1.ephec-ti.be.
+ns  IN  A   1.2.3.4
+www IN  A   1.2.3.4

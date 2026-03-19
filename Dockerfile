@@ -11,3 +11,5 @@ COPY db.woodytoys.zone /var/lib/bind/db.woodytoys.zone
 
 # Droits appropriés
 RUN chown -R bind:bind /etc/bind/ /var/lib/bind/ /var/cache/bind/
+
+CMD ["/usr/sbin/named", "-g", "-c", "/etc/bind/named.conf", "-u", "bind"]

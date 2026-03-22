@@ -1,0 +1,5 @@
+web/letsencrypt/
+web/certificate/
+web/nginx/ssl/
+web/*.sql
+web/.env

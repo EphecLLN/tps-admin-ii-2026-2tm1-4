@@ -1,44 +1,29 @@
-<html>
-<style>
-   table,
-   th,
-  td {
-     padding: 10px;
-     border: 1px solid black;
-     border-collapse: collapse;
-  }
-</style>
-
-<head>
-<title>Catalogue WoodyToys</title>
-</head>
-
-<body>
-<h1>Catalogue WoodyToys</h1>
 
 <?php
-$dbname = 'woodytoys';
-$dbuser = 'root';
-$dbpass = 'root';
-$dbhost = 'db';
-$connect = mysqli_connect($dbhost, $dbuser, $dbpass) or die("Unable to connect to '$dbhost'");
-mysqli_select_db($connect,$dbname) or die("Could not open the database '$dbname'");
-$result = mysqli_query($connect,"SELECT id, product_name, product_price FROM products");
+// On récupère les variables injectées par Docker via le fichier .env
+$dbname = getenv('MARIADB_DATABASE');
+$dbuser = getenv('MARIADB_USER');     // C'est ici qu'on utilise 'woodytoys' au lieu de 'root'
+$dbpass = getenv('MARIADB_PASSWORD'); 
+$dbhost = 'mysql-db'; // Au lieu de getenv
+
+// Connexion propre
+$connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname) 
+    or die("Impossible de se connecter à l'hôte : " . $dbhost);
+
+// Requête
+$result = mysqli_query($connect, "SELECT id, product_name, product_price FROM products");
 ?>
 
 <table>
 <tr>
- <th>Numéro de produit</th>
- <th>Descriptif</th>
- <th>Prix</th>
+  <th>Numéro de produit</th>
+  <th>Descriptif</th>
+  <th>Prix</th>
 </tr>
 
-<?
+<?php // Attention : utilise bien <?php ici pour éviter les erreurs de "short tags"
 while ($row = mysqli_fetch_array($result)) {
-  printf("<tr><th>%s</th> <th>%s</th> <th>%s</th></tr>", $row[0], $row[1],$row[2]);
+    printf("<tr><td>%s</td> <td>%s</td> <td>%s</td></tr>", $row[0], $row[1], $row[2]);
 }
 ?>
-
 </table>
-</body>
-</html>

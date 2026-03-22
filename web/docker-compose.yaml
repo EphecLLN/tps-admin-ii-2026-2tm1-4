@@ -8,18 +8,19 @@ services:
       - "53:53/udp"
       - "53:53/tcp"
     networks:
-      - tps-network
+      - app_net
 
-  # AJOUT DU SERVICE PHP
   php:
-    container_name: php-fpm
     build:
       context: ./php
       dockerfile: Dockerfile
+    container_name: php-app-new
     volumes:
       - ./html:/var/www/html
+      - ./php/php.ini:/usr/local/etc/php/php.ini
+    env_file: .env
     networks:
-      - tps-network
+      - app_net
 
   web:
     build:
@@ -28,26 +29,43 @@ services:
     container_name: nginx-server
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./html:/var/www/html
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - ./certificate/nginx-selfsigned.crt:/etc/ssl/certs/nginx-selfsigned.crt:ro
+      - ./certificate/nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./www:/var/www/html/www
+      - ./blog:/var/www/html/blog
+      - ./letsencrypt:/etc/letsencrypt
     depends_on:
       - dns
       - php
       - db
     networks:
-      - tps-network
+      - app_net
 
   db:
-    image: mariadb:latest
+    image: mariadb:11.1
     container_name: mysql-db
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: woodytoys
+      - MARIADB_ROOT_PASSWORD=root
+      - MARIADB_DATABASE=woodytoys
+      - MARIADB_USER=wt-user
+      - MARIADB_PASSWORD=wt-pwd
+
+    env_file: .env
     volumes:
       - ./mysql/woodytoys.sql:/docker-entrypoint-initdb.d/woodytoys.sql
+      - ./mysql:/docker-entrypoint-initdb.d:ro
+      - mariadb_data:/var/lib/mysql  # <--- Ajout de la persistance ici
     networks:
-      - tps-network
+      - app_net
 
 networks:
-  tps-network:
+  app_net:
     driver: bridge
+
+volumes:
+  mariadb_data:

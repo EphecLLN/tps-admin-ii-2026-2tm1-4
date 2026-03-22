@@ -1,0 +1,16 @@
+$TTL 86400
+@   IN  SOA ns.m1-4.ephec-ti.be. admin.m1-4.ephec-ti.be. (
+        2026031601 ; Serial
+        3600       ; Refresh
+        900        ; Retry
+        1209600    ; Expire
+        86400 )    ; Minimum
+
+@   IN  NS  ns.m1-4.ephec-ti.be.
+
+; Remplace 1.2.3.4 par ton IP réelle de VPS
+ns   IN  A   1.2.3.4  
+www  IN  A   1.2.3.4  
+
+; Attention : blog doit pointer vers ton domaine local, pas vers l'extérieur
+blog IN  CNAME www.m1-4.ephec-ti.be.

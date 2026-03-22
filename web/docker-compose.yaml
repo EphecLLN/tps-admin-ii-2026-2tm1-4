@@ -1,0 +1,53 @@
+services:
+  dns:
+    build:
+      context: ./dns
+      dockerfile: Dockerfile
+    container_name: dns-server
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    networks:
+      - tps-network
+
+  # AJOUT DU SERVICE PHP
+  php:
+    container_name: php-fpm
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    volumes:
+      - ./html:/var/www/html
+    networks:
+      - tps-network
+
+  web:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx-server
+    ports:
+      - "80:80"
+    volumes:
+      - ./html:/var/www/html
+    depends_on:
+      - dns
+      - php
+      - db
+    networks:
+      - tps-network
+
+  db:
+    image: mariadb:latest
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: woodytoys
+    volumes:
+      - ./mysql/woodytoys.sql:/docker-entrypoint-initdb.d/woodytoys.sql
+    networks:
+      - tps-network
+
+networks:
+  tps-network:
+    driver: bridge

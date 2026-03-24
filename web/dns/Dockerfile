@@ -1,8 +1,8 @@
-FROM internetsystemsconsortium/bind9:9.18
+CFROM internetsystemsconsortium/bind9:9.18
 
 # On copie juste les fichiers
-COPY config/named.conf /etc/bind/named.conf
-COPY config/named.conf.local /etc/bind/named.conf.local
+COPY named.conf /etc/bind/named.conf
+COPY named.conf.local /etc/bind/named.conf.local
 COPY zones/ /var/lib/bind/
 
 # On s'assure que Bind a les droits

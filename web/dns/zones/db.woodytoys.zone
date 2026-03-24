@@ -22,3 +22,11 @@ blog    IN  CNAME www.m1-4.ephec-ti.be.
 
 ; --- Sécurité Mail (SPF) ---
 @       IN  TXT "v=spf1 mx a ip4:91.134.138.211 -all"
+
+; --- Signature DKIM ---
+mail._domainkey IN TXT ( "v=DKIM1; h=sha256; k=rsa; "
+         "p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsiEPJjxMtBPVjdyYs37XkC6X4q6U6wa28Ddmnj6JK8rkXBJdBm+CSOx8i/G9lbPh6SFONb/42apKZvZUuk9EwrXsra/lvNdOZv/yLy6lD97XAqn66TxcVuKZDC6fG6A6L6bbp28+3KbcvU/g7JTunxWU62en5uvylIPdp8QZYOTEoHe5/Y3tHTnAr4E/Ie0sDn1Ypv16l7jJuj"
+         "KDMq2v7x+DCENCBZCyLLoopEYh5TztpaaHctofWLi05zq9uSrpHg2Bz22QEeweMOGAfaGIqM/Ws2tJRZznJNnbn59UDiALUhqxk5poLpBv8BdIvclYHWBZjK8Wk1QYA/roQ2yILQIDAQAB" )
+
+_dmarc  IN  TXT "v=DMARC1; p=none; adkim=r; aspf=r"
+

@@ -9,6 +9,8 @@ services:
       - "53:53/tcp"
     networks:
       - app_net
+    volumes:
+      - ./dns:/etc/bind
 
   php:
     build:

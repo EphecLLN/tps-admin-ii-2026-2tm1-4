@@ -1,16 +1,24 @@
 $TTL 86400
 @   IN  SOA ns.m1-4.ephec-ti.be. admin.m1-4.ephec-ti.be. (
-        2026031601 ; Serial
+        2026032403 ; Serial (AnnéeMoisJourN°)
         3600       ; Refresh
         900        ; Retry
         1209600    ; Expire
         86400 )    ; Minimum
 
+; --- Serveurs de noms ---
 @   IN  NS  ns.m1-4.ephec-ti.be.
 
-; Remplace 1.2.3.4 par ton IP réelle de VPS
-ns   IN  A   1.2.3.4  
-www  IN  A   1.2.3.4  
+; --- Serveur de Mail (MX) ---
+@   IN  MX  10 mail.m1-4.ephec-ti.be.
 
-; Attention : blog doit pointer vers ton domaine local, pas vers l'extérieur
-blog IN  CNAME www.m1-4.ephec-ti.be.
+; --- Enregistrements A (IP du VPS) ---
+ns      IN  A   91.134.138.211
+www     IN  A   91.134.138.211
+mail    IN  A   91.134.138.211
+
+; --- Alias (CNAME) ---
+blog    IN  CNAME www.m1-4.ephec-ti.be.
+
+; --- Sécurité Mail (SPF) ---
+@       IN  TXT "v=spf1 mx a ip4:91.134.138.211 -all"

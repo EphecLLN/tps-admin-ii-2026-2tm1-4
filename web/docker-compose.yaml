@@ -65,6 +65,28 @@ services:
     networks:
       - app_net
 
+  mailserver:
+    image: ghcr.io/docker-mailserver/docker-mailserver:latest
+    container_name: mail-server
+    hostname: mail
+    domainname: m1-4.ephec-ti.be
+    ports:
+      - "25:25"    # SMTP
+      - "587:587"  # SMTP (STARTTLS)
+      - "993:993"  # IMAP (SSL/TLS)
+    volumes:
+      - ./docker-mailserver/mail-data:/var/mail
+      - ./docker-mailserver/mail-state:/var/mail-state
+      - ./docker-mailserver/mail-logs:/var/log/mail
+      - ./docker-mailserver/config:/tmp/docker-mailserver
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - ENABLE_SPAMASSASSIN=1
+      - ENABLE_CLAMAV=0 # Désactivé pour économiser de la RAM sur petit VPS
+      - ENABLE_FAIL2BAN=1
+      - SSL_TYPE=letsencrypt
+    restart: always
+
 networks:
   app_net:
     driver: bridge

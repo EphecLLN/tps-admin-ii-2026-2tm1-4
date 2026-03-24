@@ -1,9 +1,9 @@
 zone "m1-4.ephec-ti.be" {
     type master;
-    file "/var/lib/bind/db.woodytoys.zone";
+    file "/etc/bind/zones/db.woodytoys.zone";
 };
 
 zone "ephec.be" {
     type master;
-    file "/var/lib/bind/db.ephec.be";
+    file "/etc/bind/zones/db.ephec.be";
 };

@@ -3,3 +3,15 @@ web/certificate/
 web/nginx/ssl/
 web/*.sql
 web/.env
+
+# On ignore les données du serveur mail
+web/docker-mailserver/mail-data/
+web/docker-mailserver/mail-state/
+web/docker-mailserver/mail-logs/
+web/docker-mailserver/config/
+
+# On ignore la base de données brute
+web/mysql/
+
+# On ignore les certificats de sécurité
+letsencrypt/

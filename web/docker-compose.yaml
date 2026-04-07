@@ -19,7 +19,7 @@ services:
     container_name: php-app-new
     volumes:
       - ./html:/var/www/html
-      - ./php/php.ini:/usr/local/etc/php/php.ini
+      - ./nginx/ssl:/etc/nginx/ssl:ro
     env_file: .env
     networks:
       - app_net
@@ -38,8 +38,6 @@ services:
       - ./certificate/nginx-selfsigned.crt:/etc/ssl/certs/nginx-selfsigned.crt:ro
       - ./certificate/nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key:ro
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
-      - ./www:/var/www/html/www
-      - ./blog:/var/www/html/blog
       - ./letsencrypt:/etc/letsencrypt
     depends_on:
       - dns

@@ -19,7 +19,7 @@ www     IN  A   91.134.138.211
 mail    IN  A   91.134.138.211
 
 ; --- Alias (CNAME) ---
-blog    IN  CNAME www.m1-4.ephec-ti.be.
+blog    IN  CNAME m1-4.ephec-ti.be.
 
 ; --- Sécurité Mail (SPF) ---
 @       IN  TXT "v=spf1 mx a ip4:91.134.138.211 -all"

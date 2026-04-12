@@ -35,10 +35,10 @@ services:
     volumes:
       - ./html:/var/www/html
       - ./nginx/ssl:/etc/nginx/ssl:ro
-      - ./certificate/nginx-selfsigned.crt:/etc/ssl/certs/nginx-selfsigned.crt:ro
-      - ./certificate/nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key:ro
-      - ./nginx/conf.d:/etc/nginx/conf.d:ro
-      - ./letsencrypt:/etc/letsencrypt
+#      - ./certificate/nginx-selfsigned.crt:/etc/ssl/certs/nginx-selfsigned.crt:ro
+#      - ./certificate/nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key:ro
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./letsencrypt:/etc/letsencrypt:ro
     depends_on:
       - dns
       - php

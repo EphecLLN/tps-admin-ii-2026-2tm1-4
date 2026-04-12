@@ -6,6 +6,7 @@ $TTL 86400
         1209600    ; Expire
         86400 )    ; Minimum
 
+@       IN  A   91.134.138.211
 ; --- Serveurs de noms ---
 @   IN  NS  ns.m1-4.ephec-ti.be.
 

@@ -8,5 +8,5 @@ $TTL 86400
 
 @    IN  NS   ns.ephec.be.
 
-ns   IN  A    10.0.0.10   ; L'adresse IP de ton serveur DNS
-www  IN  A    10.0.0.20   ; L'adresse IP de ton futur site web; Serial (Date du jour + n°)
+ns   IN  A    91.134.138.211   ; L'adresse IP de ton serveur DNS
+www  IN  A    91.134.138.211   ; L'adresse IP de ton futur site web; Serial (Date du jour + n°)

@@ -1,6 +1,6 @@
 $TTL 86400
 @   IN  SOA ns.m1-4.ephec-ti.be. admin.m1-4.ephec-ti.be. (
-        2026041206 ; Serial (AnnéeMoisJourN°)
+        2026041302 ; Serial (AnnéeMoisJourN°)
         3600       ; Refresh
         900        ; Retry
         1209600    ; Expire
@@ -13,11 +13,13 @@ $TTL 86400
 @   IN  MX  10 mail.m1-4.ephec-ti.be.
 
 ; --- Enregistrements A (IP du VPS) ---
-@       IN  NS      ns.m1-4.ephec-ti.be.
+@       IN  A   91.134.138.211
 ns      IN  A   91.134.138.211
 www     IN  A   91.134.138.211
 mail    IN  A   91.134.138.211
-_acme-challenge IN  TXT     "0Vp_6JcLWmN8AVgg4j7ZtDoywqt07cXZbJK5DUuVXRc"
+_acme-challenge     IN  TXT "sO8WTarylbo9a7-5sAoIOVyFVnI2dEg7AziIsSh2Lgo"
+_acme-challenge.www IN  TXT "vJ4SyyBCO3jn_WQmsYw4gxBXEodNtyl2Lyvj-tf8iG4"
+_acme-challenge.mail IN  TXT "7_3LySCIp2oKpOoKhZFDtbnox0UUE9WetHHdSu0ZUMg"
 
 ; --- Alias (CNAME) ---
 blog            IN  CNAME   www

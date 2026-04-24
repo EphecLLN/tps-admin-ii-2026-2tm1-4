@@ -8,7 +8,8 @@ services:
       - "53:53/udp"
       - "53:53/tcp"
     networks:
-      - app_net
+#      - app_net
+       - end_a
     volumes:
       - ./dns/named.conf.local:/etc/bind/named.conf.local
       - ./dns/named.conf.options:/etc/bind/named.conf.options
@@ -24,7 +25,8 @@ services:
       - ./nginx/ssl:/etc/nginx/ssl:ro
     env_file: .env
     networks:
-      - app_net
+#      - app_net
+       - end_a
 
   web:
     build:
@@ -45,7 +47,8 @@ services:
       - php
       - db
     networks:
-      - app_net
+#      - app_net
+       - end_a
 
   db:
     image: mariadb:11.1
@@ -62,7 +65,8 @@ services:
       - ./mysql:/docker-entrypoint-initdb.d:ro
       - mariadb_data:/var/lib/mysql  # <--- Ajout de la persistance ici
     networks:
-      - app_net
+#      - app_net
+       - end_b
 
   mailserver:
     image: ghcr.io/docker-mailserver/docker-mailserver:latest
@@ -90,8 +94,14 @@ services:
       - mailserver.env
 
 networks:
-  app_net:
-    driver: bridge
+#  app_net:
+#    driver: bridge
+   end_a:
+     driver: bridge
+   end_b:
+     driver: bridge
+
+
 
 volumes:
   mariadb_data:

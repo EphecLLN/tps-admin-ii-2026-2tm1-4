@@ -1,0 +1,10 @@
+services:
+  bind9:
+    image: ubuntu/bind9
+    container_name: dns-server
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    volumes:
+      - ./config/named.conf.local:/etc/bind/named.conf.local
+      - ./zones/db.ephec.be:/etc/bind/db.ephec.be

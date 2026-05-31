@@ -1,0 +1,17 @@
+web/letsencrypt/
+web/certificate/
+web/nginx/ssl/
+web/*.sql
+web/.env
+
+web/docker-mailserver/mail-data/
+web/docker-mailserver/mail-state/
+web/docker-mailserver/mail-logs/
+web/docker-mailserver/config/
+
+web/mysql/
+
+letsencrypt/
+
+.env
+mailserver.env
